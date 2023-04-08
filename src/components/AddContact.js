@@ -15,13 +15,12 @@ class AddContact extends React.Component {
             return
         }
         this.count++;
-        this.setState({ id: this.count, ...this.state })
         console.log("count is" + this.count)
         this.props.addContactHandler(this.state)
         this.setState({
             name: "",
             email: "",
-            id: 0
+            id: this.count
         })
     }
     render() {
