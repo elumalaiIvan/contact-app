@@ -3,21 +3,26 @@ import React from "react";
 class AddContact extends React.Component {
 
     state = {
+        id: 0,
         name: "",
         email: ""
     }
+    count = 0;
     add = (e) => {
         e.preventDefault()
         if (this.state.name === "" || this.state.email === "") {
             alert("All the fields are required")
             return
         }
+        this.count++;
+        this.setState({ id: this.count, ...this.state })
+        console.log("count is" + this.count)
         this.props.addContactHandler(this.state)
         this.setState({
             name: "",
-            email: ""
+            email: "",
+            id: 0
         })
-        console.log(this.state)
     }
     render() {
         return (
