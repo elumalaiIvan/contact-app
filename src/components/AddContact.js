@@ -1,8 +1,9 @@
 import React from "react";
+import { Navigate, redirect } from "react-router-dom"
 
 class AddContact extends React.Component {
-
     state = {
+        redirect: false,
         id: 0,
         name: "",
         email: ""
@@ -15,13 +16,17 @@ class AddContact extends React.Component {
             return
         }
         this.count++;
-        console.log("count is" + this.count)
         this.props.addContactHandler(this.state)
         this.setState({
             name: "",
             email: "",
-            id: this.count
+            id: this.count,
+            redirect: true
         })
+        console.log(this.props)
+
+        //works on older versions
+        // this.props.history.push("/")
     }
     render() {
         return (
@@ -38,6 +43,9 @@ class AddContact extends React.Component {
                     </div>
                     <button className="ui button blue">Add</button>
                 </form>
+                {
+                    this.state.redirect && <Navigate to='/' replace={true} />
+                }
             </div>
         )
     }

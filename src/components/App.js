@@ -3,6 +3,7 @@ import AddContact from './AddContact';
 import Header from './Header';
 import ContactList from './ContactList';
 import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   const LOCAL_STORAGE_KEY = 'contacts'
@@ -27,9 +28,21 @@ function App() {
 
   return (
     <div className='ui container'>
-      <Header />
-      <AddContact addContactHandler={addContactHandler} />
-      <ContactList contacts={contacts} getContactID={removeContactHandler} />
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={
+            <ContactList contacts={contacts} getContactID={removeContactHandler} />
+          } />
+          <Route path="/add" element={
+            <AddContact addContactHandler={addContactHandler} />
+          } />
+        </Routes>
+
+
+        {/* <AddContact addContactHandler={addContactHandler} />
+        <ContactList contacts={contacts} getContactID={removeContactHandler} /> */}
+      </Router>
     </div>
   );
 }
